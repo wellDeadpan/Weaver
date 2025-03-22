@@ -34,24 +34,19 @@ Weaver/
 
 ⚙️ Setup Instructions
 1. Clone the Repository
->git clone https://github.com/wellDeadpan/Weaver.git
-cd Weaver
+```git clone https://github.com/wellDeadpan/Weaver.git```
+```cd Weaver```
 2. Build Docker Image
-bash
-Copy
-Edit
-docker build -t weaver-app .
+```docker build -t weaver-app . ```
 3. Run Docker Container
-bash
-Copy
-Edit
-docker run -p 8000:8000 weaver-app
+```docker run -p 8000:8000 weaver-app```
 4. Access API Docs
 Open http://localhost:8000/docs for Swagger UI.
 
 Test the /predict endpoint interactively.
 
 📊 Example API Request
+```
 Endpoint: POST /predict
 Request Body:
 
@@ -69,7 +64,9 @@ Edit
 {
   "prediction": [1]
 }
+```
 📈 Model Training Summary
+```
 Model: GaussianNB(priors=[0.5, 0.5])
 
 Features: Encoded patient demographic + medical data
@@ -81,6 +78,7 @@ Evaluation:
 ROC-AUC: 
 
 Threshold tuned at 0.3 for better recall
+```
 
 🧠 Future Improvements
 Automate data preprocessing in FastAPI
