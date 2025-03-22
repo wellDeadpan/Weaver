@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pydantic
+numpy
+scikit-learn  # or whatever library you used to train the model

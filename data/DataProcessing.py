@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from data.DataLoad import data_frames
+
 # Load the conditions.csv DataFrame
 conditions_df = data_frames['conditions.csv']
 # Get the frequency of each condition description
@@ -27,12 +29,14 @@ print(conditions_df.head())
 
 # Extract the start date of the heart failure condition
 heart_failure_df = conditions_df[conditions_df['HFYN'] == 1]
+heart_failure_labels = conditions_df[['PATIENT','HFYN']]
 heart_failure_dates = heart_failure_df[['PATIENT', 'START']]
 
 # Convert the START column to datetime using .loc to avoid SettingWithCopyWarning
 heart_failure_dates = heart_failure_dates.copy()
 
 heart_failure_dates.rename(columns={'PATIENT': 'PATIENT', 'START': 'HFSTART'}, inplace=True)
+heart_failure_dates['HFSTART'] = pd.to_datetime(heart_failure_dates['HFSTART'])
 
 # Load other DataFrames
 medications_df = data_frames['medications.csv']
@@ -92,8 +96,6 @@ encounter_counts = encounters_df.groupby('PATIENT').size().reset_index(name='enc
 
 # Count by encounter type (e.g., 'ambulatory', 'inpatient')
 encounter_types = pd.crosstab(encounters_df['PATIENT'], encounters_df['ENCOUNTERCLASS']).reset_index()
-
-
 meds_df = medications_before_hf.copy()
 
 # Total medications per patient
@@ -125,11 +127,21 @@ cardiac_procs = proc_df[proc_df['DESCRIPTION'].str.contains('cardiac|heart', cas
 cardiac_proc_flag = cardiac_procs.groupby('PATIENT').size().reset_index(name='cardiac_proc_count')
 
 
-# Start with patients dataframe
-features_df = patients_df[['Id']]  # assuming 'Id' is patient ID
-features_df = features_df.rename(columns={'Id': 'PATIENT'})
+# Load the patients.csv DataFrame
+patients_df = data_frames['patients.csv']
+# Convert the BIRTHDATE column to datetime
+patients_df['BIRTHDATE'] = pd.to_datetime(patients_df['BIRTHDATE'])
+# Rename the Id column to PATIENT in patients_df
+patients_df.rename(columns={'Id': 'PATIENT'}, inplace=True)
+# Merge the patients_df with heart_failure_dates on the PATIENT column
+merged_df = pd.merge(heart_failure_dates, patients_df[['PATIENT', 'BIRTHDATE', 'MARITAL', 'RACE', 'ETHNICITY', 'GENDER', 'HEALTHCARE_EXPENSES',
+       'HEALTHCARE_COVERAGE', 'INCOME']], on='PATIENT')
+# Calculate the age at heart failure
+merged_df['AGE_AT_HF'] = (merged_df['HFSTART'] - merged_df['BIRTHDATE']).dt.days // 365
+
 
 # Merge all feature sets
+features_df = heart_failure_labels.merge(merged_df, on='PATIENT', how='left')
 features_df = features_df.merge(encounter_counts, on='PATIENT', how='left')
 features_df = features_df.merge(encounter_types, on='PATIENT', how='left')
 features_df = features_df.merge(med_counts, on='PATIENT', how='left')
@@ -138,5 +150,4 @@ features_df = features_df.merge(latest_obs, on='PATIENT', how='left')
 features_df = features_df.merge(proc_counts, on='PATIENT', how='left')
 features_df = features_df.merge(cardiac_proc_flag, on='PATIENT', how='left')
 
-# Fill NA with 0 for count columns
-features_df.fillna(0, inplace=True)
+
