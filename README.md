@@ -15,9 +15,7 @@ Evaluated with ROC-AUC, classification reports, and threshold tuning.
 Deployed with FastAPI + Docker — includes interactive API docs via Swagger.
 
 🗂️ Project Structure
-bash
-Copy
-Edit
+```
 Weaver/
 ├── app/                      # FastAPI app
 │   └── main.py
@@ -32,12 +30,11 @@ Weaver/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
+```
+
 ⚙️ Setup Instructions
 1. Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/wellDeadpan/Weaver.git
+>git clone https://github.com/wellDeadpan/Weaver.git
 cd Weaver
 2. Build Docker Image
 bash
