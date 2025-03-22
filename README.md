@@ -46,21 +46,16 @@ Open http://localhost:8000/docs for Swagger UI.
 Test the /predict endpoint interactively.
 
 📊 Example API Request
-```
+
 Endpoint: POST /predict
 Request Body:
-
-json
-Copy
-Edit
+```
 {
   "features": [1.0, 0.5, 2.3, 4.4, ..., 29.1]  # Total 29 features expected
 }
+```
 Response:
-
-json
-Copy
-Edit
+```
 {
   "prediction": [1]
 }
