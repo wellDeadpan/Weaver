@@ -6,8 +6,8 @@ import numpy as np
 
 # Load your trained model
 model = joblib.load("model/model_NB.pkl")
-model = joblib.load("model/label_encoders.pkl")
-model = joblib.load("model/onehot_encoder.pkl")
+label = joblib.load("model/label_encoders.pkl")
+onehot = joblib.load("model/onehot_encoder.pkl")
 
 # Define FastAPI app
 app = FastAPI()

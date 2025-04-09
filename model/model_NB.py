@@ -16,7 +16,7 @@ categorical_columns = ['MARITAL', 'RACE', 'ETHNICITY', 'GENDER']
 
 # Initialize LabelEncoder and OneHotEncoder
 label_encoders = {col: LabelEncoder() for col in categorical_columns}
-onehot_encoder = OneHotEncoder(sparse=False, drop='first')  # drop='first' to avoid multicollinearity
+onehot_encoder = OneHotEncoder(sparse_output=False, drop='first')  # drop='first' to avoid multicollinearity
 
 # Apply LabelEncoder to each categorical column
 for col in categorical_columns:

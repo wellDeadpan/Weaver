@@ -5,10 +5,13 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy files
-COPY app/requirements.txt ./
+COPY requirements.txt ./
+COPY app .
+# explicitly copy model if needed
+COPY model/ model/
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app .
 
 # Expose port
 EXPOSE 8000

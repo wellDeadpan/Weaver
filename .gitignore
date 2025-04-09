@@ -1,0 +1,27 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Model artifacts
+model/*.pkl
+
+# Data files
+synthea/
+*.csv
+*.tsv
+*.xlsx
+
+# Virtual environments
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker artifacts
+*.tar
