@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from data.DataLoad import data_frames
+from weaver.data.DataLoad import data_frames
 
 # Load the conditions.csv DataFrame
 conditions_df = data_frames['conditions.csv']

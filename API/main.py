@@ -1,4 +1,4 @@
-# app/main.py
+# API/main.py
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import joblib
@@ -9,7 +9,7 @@ model = joblib.load("model/model_NB.pkl")
 label = joblib.load("model/label_encoders.pkl")
 onehot = joblib.load("model/onehot_encoder.pkl")
 
-# Define FastAPI app
+# Define FastAPI API
 app = FastAPI()
 
 # Define input data model

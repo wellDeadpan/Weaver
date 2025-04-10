@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 # Define the folder path
-folder_path = r'F:\GitHub\Weaver\synthea\MA\csv'
+folder_path = r'/synthea/MA/csv'
 
 # List all CSV files in the folder
 csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]

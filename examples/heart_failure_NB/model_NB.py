@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
 import pickle
 
-from data.DataProcessing import features_df
+from weaver.data.DataProcessing import features_df
 
 
 features_df = features_df.drop(['HFSTART', 'BIRTHDATE'], axis=1)

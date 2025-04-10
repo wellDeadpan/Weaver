@@ -1,5 +1,5 @@
 import copy
-from model.config import FEATURES, OUTCOMES
+from examples.anomaly_detection.config import FEATURES, OUTCOMES
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
